@@ -1,0 +1,112 @@
+ /*
+        capturar la cedula, nombres y sueldos de n empleados, despues de estar capturados, 
+        mostrar los nombres de los empleados con sus respectivos sueldos e indicar
+        el sueldo menor y mayor con los respectivos nombres de los empleados
+        */
+        Scanner Leer = new Scanner(System.in);
+        int n;
+        String numero;
+        int sexo1 = 0;
+        //capturamos la cantidad de empleados
+        do{
+            do{
+                System.out.println("Digite la cantidad de empleados");
+                numero = Leer.nextLine();
+            }while(numero.isEmpty());
+            n = Integer.parseInt(numero);
+        }while(n<1);
+        //creamos los arreglos
+        float [] sueldo = new float[n];
+        String [] nom = new String[n];      
+        String [] ced = new String[n];
+        int [] cedula = new int[n];
+        byte[] sexo = new byte[n];
+        String[] SEXO = new String[n];
+        float smay, smen;        
+        int p, pmen, pmay, J,aux;
+        //capturamos los nombre y los sueldos
+        for(p=0 ; p<sueldo.length ; p++)
+        {
+            do{
+            //captura la cedula
+                do{
+                    System.out.println("Digite la cedula de la " + (p+1) + " persona");
+                    ced[p] = Leer.nextLine();
+    
+                }while(ced[p].length()<1 || ced[p].length()>10);            
+                //analizamos si ya esta
+                for(J=0 ; J<p ; J++)
+                    if(ced[p].equals(ced[J]))
+                        break;
+                cedula[p] = Integer.parseInt(ced[p]);
+            }while(p!=J);
+            do{
+                System.out.println("Digite el nombre de la " + (p+1) + " persona");
+                nom[p] = Leer.nextLine();
+            }while(nom[p].isEmpty()); //nom[p].isEmpty()==true
+            do{
+                do{
+                    System.out.println("Digite el sueldo de la " + (p+1) + " persona");
+                    numero = Leer.nextLine();
+                }while(numero.isEmpty());
+                sueldo[p] = Float.parseFloat(numero);
+            }while(sueldo[p]<1000000); 
+            
+            do {
+                    System.out.println("Digite (0) - para MASCULINO, (1) - para FEMENINO o (2) - para NO SE QUIEN SOY de la " + (p + 1) + " persona");
+                    sexo[p] = Leer.nextByte();
+                    if (sexo[p] == 0){
+                        SEXO[p] = "Masculino";
+                        break;
+                    }
+                    if (sexo[p] == 1){
+                        SEXO[p] = "Femenino";
+                        break;
+                    }
+                    if (sexo[p] == 2){
+                        SEXO[p] = "No se quien soy";
+                        break;
+                    }
+                } while (sexo1 < 3);
+        }
+        //mostramos los nombres y sueldos
+        for(p=pmay=pmen=0 , smay=0, smen=100000000 ; p < sueldo.length ; p++)
+        {
+            
+            System.out.println(nom[p] + " con sueldo: " + sueldo[p] + " y el numero de cedula es: " + ced[p]+", su sexo es: "+SEXO[p]);
+            if(sueldo[p] > smay)
+            {
+                smay = sueldo[p];
+                pmay = p;
+            }
+            if(sueldo[p] < smen)
+            {
+                smen = sueldo[p];                
+                pmen = p;
+            }
+        }
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("se ordenan los numeros de los sueldos de mayor a menor: ");
+        System.out.println(nom[pmay] + " tiene el sueldo mayor es: " + smay);
+        System.out.println(nom[pmen] + " tiene el sueldo menor es: " + smen);
+        System.out.println("--------------------------------------------------------------------------");
+        
+        //ordenamos con burbuja mejorada
+        for(p=0 ; p < cedula.length-1 ; p++)
+            for(J=p+1 ; J<cedula.length ; J++)
+                if(cedula[p]<cedula[J])
+                {
+                    aux = cedula[p];
+                    cedula[p] = cedula[J] ;
+                    cedula[J] = aux;
+                }
+                  
+        //mostramos el arreglo
+        System.out.println("se ordenan los numeros de las cedulas de mayor a menor: ");
+        for(p=0 ; p<cedula.length ; p++)
+            System.out.println((p+1)+". Numero de cedula: " + cedula[p]);
+                
+     
+     
+     
+     }

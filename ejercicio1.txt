@@ -1,0 +1,83 @@
+/*
+        Capturar los datos de n empleados(cédula, nombres, sueldo, género)
+        Después de estar capturados, mostrar los datos de forma ascendente por cédula
+         */
+        Scanner Leer = new Scanner(System.in);
+        int n;
+        String numero;
+        //capturamos la cantidad de empleados
+        do {
+            do {
+                System.out.println("Digite la cantidad de empleados");
+                numero = Leer.nextLine();
+            } while (numero.isEmpty());
+            n = Integer.parseInt(numero);
+        } while (n < 1);
+        //creamos los arreglos
+        float[] sueldo = new float[n];
+        String[] nom = new String[n];
+        String[] ced = new String[n];
+        char[] sexo = new char[n];
+
+        float smay, smen;
+        int p, pmen, pmay, J;
+        //capturamos los nombre, los sueldos, cedula y sexo
+
+        for (p = 0; p < sueldo.length; p++) {
+            do {
+                //captura la cedula
+                do {
+                    System.out.println("Digite la cedula de la " + (p + 1) + " persona");
+                    ced[p] = Leer.nextLine();
+                } while (ced[p].length() < 1 || ced[p].length() > 10);
+                //analizamos si ya esta
+                for (J = 0; J < p; J++) {
+                    if (ced[p].equals(ced[J])) {
+                        break;
+                    }
+                }
+            } while (p != J);
+            do {
+                //nombre
+                System.out.println("Digite el nombre de la " + (p + 1) + " persona");
+                nom[p] = Leer.nextLine();
+            } while (nom[p].isEmpty()); //nom[p].isEmpty()==true
+            do {
+                do {
+                    //sueldo
+                    System.out.println("Digite el sueldo de la " + (p + 1) + " persona");
+                    numero = Leer.nextLine();
+                } while (numero.isEmpty());
+                sueldo[p] = Float.parseFloat(numero);
+            } while (sueldo[p] < 1000000);
+
+            //sexo
+            System.out.println("dgite su sexo: H. hombre, M. mujer, X. no reconocible ");
+            sexo[p] = (char) sexo.length;
+
+            //mostramos los nombres y sueldos
+            if (sexo[p] = 'H') {
+                System.out.println("Eres un hombre");
+            } else if (sexo[p] == 'M') {
+                System.out.println("Eres una mujer");
+            } else if (sexo[p] == 'X') {
+                System.out.println("no se que eres");
+            }
+
+        }
+
+        for (p = pmay = pmen = 0, smay = 0, smen = 100000000; p < sueldo.length; p++) {
+            System.out.println(nom[p] + " con sueldo: " + sueldo[p] + sexo[p]);
+            if (sueldo[p] > smay) {
+                smay = sueldo[p];
+                pmay = p;
+            }
+            if (sueldo[p] < smen) {
+                smen = sueldo[p];
+                pmen = p;
+            }
+        }
+        System.out.println(nom[pmay] + " tiene el sueldo mayor es: " + smay);
+        System.out.println(nom[pmen] + " tiene el sueldo menor es: " + smen);
+
+    }
